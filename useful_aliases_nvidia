@@ -1,0 +1,8 @@
+launch() {
+    xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $1` 
+    nvidia-docker start $1
+    nvidia-docker attach $1
+}
+
+alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
+alias docker_rm_all="docker rm \`docker ps -a -q\`"
