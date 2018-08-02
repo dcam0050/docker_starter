@@ -1,0 +1,9 @@
+[Unit]
+Description=Mirosim Service
+
+[Service]
+User=pisrv
+ExecStart=/home/pisrv/docker_home/startSims.sh
+
+[Install]
+WantedBy=multi-user.target
