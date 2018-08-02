@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source ~/.bashrc
 IPADDR=$(ifconfig eno1 | awk '/inet addr/ {gsub("addr:", "", $2); print $2}')
 
 if [ $IPADDR == '192.168.1.129' ]
