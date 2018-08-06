@@ -161,6 +161,35 @@ You can attach to this terminal by running `docker attach <Container_name>`.
 
 This will attach your current terminal to the docker container but you can only have a single terminal attached to any one container. See **running multiple terminals** below if you are thirsty for more young padawan.
 
+# Compile your own BlocklySim docker image
+
+1. Clone dockerSynthesizer
+```
+cd /home/$USER
+
+git clone https://github.com/dcam0050/dockerSynthesizer
+```
+
+2. Copy extra files from docker_starter to dockerSynthesizer
+```
+cd /home/$USER/dockerSynthesizer
+
+mkdir compileDir
+
+cd compileDir
+
+cp ../../docker_home/docker_starter/blockly_sim_image_compile/* .
+```
+
+3. Make Dockerfile
+```
+export DOCKERPARTS=/home/$USER/dockerSynthesizer/
+
+cd /home/$USER/dockerSynthesizer/
+
+make build containerName=<containerName> tagName=<imageName>
+```
+
 # Optional Bits
 
 ## Multiple Terminals
