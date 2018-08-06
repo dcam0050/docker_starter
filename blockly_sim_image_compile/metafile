@@ -1,0 +1,35 @@
+base
+#base-trusty
+python2
+#security
+opencv3
+yarp
+icub-main
+icub-contrib
+caffe
+iol
+kinect
+#postgresql
+speech
+karma
+humanSensing
+# localYarpBackup
+# wysiwydYr2
+#wysiwydYr3
+icub-client
+SAM_deps
+#SAM_XPrize
+#VMI
+ros-kinetic
+gazebo_7
+blockly
+miro
+icub-gazebo
+baxter-kinetic
+pepper_kinetic_gaz7
+pygates_deps
+#unity
+#deepSpeech
+#telepresence2
+#nrp
+end_ssh
