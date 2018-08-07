@@ -8,8 +8,8 @@ VIDEO_GID := $(shell grep video /etc/group | cut -d':' -f3)
 build: clean docker build_image buildBashrc build_image1
 
 run:
-	nvidia-docker start $(containerName)
-	nvidia-docker attach $(containerName)
+	docker start $(containerName)
+	docker attach $(containerName)
 
 clean:
 	@rm -f bashrc_iCub
@@ -26,7 +26,7 @@ configure:
 
 first_run:
 	@echo ${DISPLAY}
-	nvidia-docker run -dit --env="DISPLAY="${DISPLAY} --env="QT_X11_NO_MITSHM=1" 					\
+	docker run -dit --env="DISPLAY="${DISPLAY} --env="QT_X11_NO_MITSHM=1" 					\
 					  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" 					\
 					  --volume=/dev/snd:/dev/snd							\
 					  --device=/dev/ttyACM0								\	
@@ -39,21 +39,21 @@ first_run:
 					  --network=host								\
 					  --privileged 									\
 					  $(tagName)
-	nvidia-docker stop $(containerName)
+	docker stop $(containerName)
 	#set up display
 	@xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $(containerName)`
-	nvidia-docker start $(containerName)
-	nvidia-docker attach $(containerName)
+	docker start $(containerName)
+	docker attach $(containerName)
 
 build_image build_image1:
 	@echo $(VIDEO_GID)
-	nvidia-docker build -t $(tagName) . --build-arg VIDEO_GID=$(VIDEO_GID)
+	docker build -t $(tagName) . --build-arg VIDEO_GID=$(VIDEO_GID)
 
 	-@docker stop $(containerName) >/dev/null || true
 	-@docker rm $(containerName) >/dev/null || true
 
 
-	nvidia-docker run -dit --env="DISPLAY="${DISPLAY} --env="QT_X11_NO_MITSHM=1" 					\
+	docker run -dit --env="DISPLAY="${DISPLAY} --env="QT_X11_NO_MITSHM=1" 					\
 					  --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" 									\
 					  --volume=/dev/snd:/dev/snd													\
 					  --device=/dev/ttyACM0															\
@@ -67,7 +67,7 @@ build_image build_image1:
 					  --privileged 																	\
 					  $(tagName)
 
-	nvidia-docker stop $(containerName)
+	docker stop $(containerName)
 	#set up display
 	@xhost +local:`docker inspect --format='{{ .Config.Hostname }}' $(containerName)`
 
