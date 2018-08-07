@@ -185,7 +185,7 @@ cp ../../docker_home/docker_starter/blockly_sim_image_compile/* .
 ```
 export DOCKERPARTS=/home/$USER/dockerSynthesizer/
 
-cd /home/$USER/dockerSynthesizer/
+cd /home/$USER/dockerSynthesizer/compileDir
 
 make build containerName=<containerName> tagName=<imageName>
 ```
